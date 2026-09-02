@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Mental Health Score Predictor</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="background-decor">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+
+  <main class="app-container">
+    <header class="app-header">
+      <span class="badge">AI Health Assessment</span>
+      <h1>Student Mental Health Predictor</h1>
+      <p>Enter daily habits and academic details to predict the mental health risk score.</p>
+    </header>
+
+    <div class="content-grid">
+      <!-- Input Form Card -->
+      <section class="card form-card">
+        <h2>Student Profile & Behavioral Data</h2>
+        
+        <div id="error-summary" class="error-summary hidden">
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+          </svg>
+          <span id="error-message"></span>
+        </div>
+
+        <form id="prediction-form" class="grid-form" novalidate>
+          <!-- Age -->
+          <div class="form-group">
+            <label for="Age">Age (10 - 100)</label>
+            <input type="number" id="Age" name="Age" min="10" max="100" placeholder="e.g. 21" required />
+            <span class="field-error" id="err-Age"></span>
+          </div>
+
+          <!-- Gender -->
+          <div class="form-group">
+            <label for="Gender">Gender</label>
+            <select id="Gender" name="Gender" required>
+              <option value="" disabled selected>Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+            <span class="field-error" id="err-Gender"></span>
+          </div>
+
+          <!-- Country -->
+          <div class="form-group">
+            <label for="Country">Country</label>
+            <select id="Country" name="Country" required>
+              <option value="" disabled selected>Select Country</option>
+              <option value="India">India</option>
+              <option value="USA">USA</option>
+              <option value="Canada">Canada</option>
+              <option value="Australia">Australia</option>
+              <option value="UK">UK</option>
+              <option value="Germany">Germany</option>
+              <option value="Mexico">Mexico</option>
+              <option value="Turkey">Turkey</option>
+              <option value="France">France</option>
+              <option value="Other">Other</option>
+            </select>
+            <span class="field-error" id="err-Country"></span>
+          </div>
+
+          <!-- Academic Level -->
+          <div class="form-group">
+            <label for="Academic_Level">Academic Level</label>
+            <select id="Academic_Level" name="Academic_Level" required>
+              <option value="" disabled selected>Select Level</option>
+              <option value="High School">High School</option>
+              <option value="Undergraduate">Undergraduate</option>
+              <option value="Graduate">Graduate</option>
+            </select>
+            <span class="field-error" id="err-Academic_Level"></span>
+          </div>
+
+          <!-- Most Used Platform -->
+          <div class="form-group">
+            <label for="Most_Used_Platform">Most Used Social Platform</label>
+            <select id="Most_Used_Platform" name="Most_Used_Platform" required>
+              <option value="" disabled selected>Select Platform</option>
+              <option value="Instagram">Instagram</option>
+              <option value="YouTube">YouTube</option>
+              <option value="TikTok">TikTok</option>
+              <option value="WhatsApp">WhatsApp</option>
+              <option value="Snapchat">Snapchat</option>
+              <option value="Facebook">Facebook</option>
+              <option value="LinkedIn">LinkedIn</option>
+              <option value="Twitter">Twitter</option>
+              <option value="LINE">LINE</option>
+              <option value="KakaoTalk">KakaoTalk</option>
+              <option value="VKontakte">VKontakte</option>
+              <option value="WeChat">WeChat</option>
+            </select>
+            <span class="field-error" id="err-Most_Used_Platform"></span>
+          </div>
+
+          <!-- Purpose Of Use -->
+          <div class="form-group">
+            <label for="Purpose_Of_Use">Primary Purpose of Usage</label>
+            <select id="Purpose_Of_Use" name="Purpose_Of_Use" required>
+              <option value="" disabled selected>Select Purpose</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Education">Education</option>
+              <option value="Networking">Networking</option>
+              <option value="News">News</option>
+            </select>
+            <span class="field-error" id="err-Purpose_Of_Use"></span>
+          </div>
+
+          <!-- Avg Daily Usage Hours -->
+          <div class="form-group">
+            <label for="Avg_Daily_Usage_Hours">Daily Screen Usage (Hours)</label>
+            <input type="number" step="0.5" id="Avg_Daily_Usage_Hours" name="Avg_Daily_Usage_Hours" min="0" max="24" placeholder="0 - 24" required />
+            <span class="field-error" id="err-Avg_Daily_Usage_Hours"></span>
+          </div>
+
+          <!-- Daily Unlocks -->
+          <div class="form-group">
+            <label for="Daily_Unlocks">Daily Phone Unlocks</label>
+            <input type="number" id="Daily_Unlocks" name="Daily_Unlocks" min="0" placeholder="e.g. 80" required />
+            <span class="field-error" id="err-Daily_Unlocks"></span>
+          </div>
+
+          <!-- Study Hours -->
+          <div class="form-group">
+            <label for="Study_Hours">Daily Study Time (Hours)</label>
+            <input type="number" step="0.5" id="Study_Hours" name="Study_Hours" min="0" max="24" placeholder="0 - 24" required />
+            <span class="field-error" id="err-Study_Hours"></span>
+          </div>
+
+          <!-- Physical Activity Hours -->
+          <div class="form-group">
+            <label for="Physical_Activity_Hours">Physical Activity (Hours/Day)</label>
+            <input type="number" step="0.5" id="Physical_Activity_Hours" name="Physical_Activity_Hours" min="0" max="24" placeholder="0 - 24" required />
+            <span class="field-error" id="err-Physical_Activity_Hours"></span>
+          </div>
+
+          <!-- Sleep Hours Per Night -->
+          <div class="form-group">
+            <label for="Sleep_Hours_Per_Night">Nightly Sleep (Hours)</label>
+            <input type="number" step="0.5" id="Sleep_Hours_Per_Night" name="Sleep_Hours_Per_Night" min="0" max="24" placeholder="0 - 24" required />
+            <span class="field-error" id="err-Sleep_Hours_Per_Night"></span>
+          </div>
+
+          <!-- Stress Level -->
+          <div class="form-group">
+            <label for="Stress_Level">Perceived Stress Level</label>
+            <select id="Stress_Level" name="Stress_Level" required>
+              <option value="" disabled selected>Select Stress Level</option>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="high">High</option>
+              <option value="Very High">Very High</option>
+            </select>
+            <span class="field-error" id="err-Stress_Level"></span>
+          </div>
+
+          <button type="submit" id="submit-btn" class="submit-btn">
+            <span class="btn-text">Generate Assessment</span>
+            <div class="spinner hidden" id="spinner"></div>
+          </button>
+        </form>
+      </section>
+
+      <!-- Result Card -->
+      <section class="card result-card" id="result-card">
+        <div class="placeholder-state" id="placeholder-state">
+          <div class="icon-circle">
+            <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h3>Awaiting Assessment Data</h3>
+          <p>Fill out the profile metrics and submit to calculate the predicted mental health score.</p>
+        </div>
+
+        <div class="result-state hidden" id="result-state">
+          <span class="result-tag">Predicted Output Score</span>
+          <div class="score-display">
+            <span class="score-number" id="score-value">0</span>
+          </div>
+          <div class="meter-bar">
+            <div class="meter-fill" id="meter-fill"></div>
+          </div>
+          <div class="insight-box" id="insight-box">
+            <h4 id="insight-title">Score Meaning</h4>
+            <p id="insight-desc">Analytical insights based on the ML pipeline response.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
