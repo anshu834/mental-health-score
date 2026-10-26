@@ -39,9 +39,9 @@ class StudentData(BaseModel):
 class PredictionResponse(BaseModel):
     predicted_mental_health_score:float
 
-@app.get('/')
+@app.get("/")
 def greet():
-    return {'welcome'}
+    return {"message": "Mental Health Assessment API is running"}
 
 top_countries=['other',
 'India',
