@@ -6,11 +6,7 @@ from pydantic import BaseModel,Field
 from typing import Literal
 from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI(
-    docs_url="/docs",
-    redoc_url="/redoc",
-    openapi_url="/openapi.json"
-)
+app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
