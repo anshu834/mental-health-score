@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const insightDesc = document.getElementById('insight-desc');
 
   
-  const API_URL = "https://mental-health-score-1-acoo.onrender.com/predict";
+  const API_URL = "https://mental-health-score-3lm0.onrender.com/predict";
 
 
   form.addEventListener('submit', async (e) => {
